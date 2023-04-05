@@ -1,0 +1,373 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+
+
+  <!-- font awesome style -->
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+
+</head>
+
+<body>
+
+  <div class="hero_area" style="min-height: 0%;">
+
+    <!-- <div class="hero_bg_box">
+      <div class="bg_img_box">
+        <img src="{% static 'images/hero-bg.png' %}" alt="">
+      </div>
+    </div> -->
+
+    <!-- header section strats -->
+    <header class="header_section" style="background: #00204a;">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+            {% if user.is_authenticated %}
+            <a class="navbar-brand" href="{% url 'home' %}"></a>
+            {% else %}
+            <a class="navbar-brand" href="{% url 'index' %}"></a>
+            {% endif %}
+            
+            <span style="color: white; font-size: larger;" class="notranslate"><b>
+              HEALTH-SEVA
+              </b>
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+          <style>
+            .dropdown {
+              position: relative;
+              display: inline-block;
+            }
+
+            .dropdown-content {
+              display: none;
+              left: 0;
+              position: absolute;
+              background-color: #f9f9f9;
+              border: 2px solid #00204a;
+              z-index: 1;
+            }
+
+            .dropdown:hover .dropdown-content {
+              display: block;
+            }
+          </style>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  ">
+              <li class="nav-item">
+                {% if user.is_authenticated %}
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+                {% else %}
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
+                {% endif %}
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'insurance' %}"> Insurance</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'myplans' %}">My plans</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'claim' %}">Claim</a>
+              </li>
+              <li class="nav-item dropdown" style="padding: 5px 5px;">
+                <span style="color: white;"><i class="fa fa-bell" aria-hidden="true"></i>&ensp;Notifications&ensp;<sup style="background: red; border-radius: 5px; padding: 0px 3px;">{{coun}}</sup>
+                </span>
+                <div class="dropdown-content">
+                  {% for nots in notify %}
+                  {% if nots.cli.user == request.user %}
+                  <a href="{% url 'notifications' nots.id  %}" style="color: #00204a;">
+                    <p>From : {{nots.bks.bankname}}</p>
+                    <p>Msg: {{nots.inc_notf}}</p>
+                    <hr style="border: 1px solid #00204a">
+                  </a>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+            </li>
+              <li class="nav-item">
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown" style="padding: 5px 5px;" class="notranslate">
+                  <span style="color: white;"><i class="fa fa-user" aria-hidden="true"></i>&ensp;{{request.user.username}}</span>
+                  <div class="dropdown-content">
+                    <a class="nav-link" href="{% url 'wallet' %}">Wallet</a>
+                    <hr style="border: 1px solid #00204a">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                  </div>
+                </li>
+                {% else %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                {% endif %}
+            </li>
+            &ensp;<div id="google_translate_element"></div>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+
+        <!-- slider section -->
+        <!-- <section class="slider_section ">
+            <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="container ">
+                    <div class="row">
+                      <div class="col-md-6 ">
+                        <div class="detail-box">
+                          <h1>
+                            Insurance <br>
+                            Company
+                          </h1>
+                          <p>
+                            The insurance sector is made up of companies that offer risk management in the form of insurance contracts. The basic concept of insurance is that one party, the insurer, will guarantee payment for an uncertain future event. Meanwhile, another party, the insured or the policyholder, pays a smaller premium to the insurer in exchange for that protection on that uncertain future occurrence.
+                          </p>
+                          <div class="btn-box">
+                            <a href="" class="btn1">
+                              Read More
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="img-box">
+                          <img src="{% static 'images/slider-img.png' %}" alt="">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item ">
+                  <div class="container ">
+                    <div class="row">
+                      <div class="col-md-6 ">
+                        <div class="detail-box">
+                          <h1>
+                            Health <br>
+                            Care
+                          </h1>
+                          <p>
+                            Health insurance is an insurance product which covers medical and surgical expenses of an insured individual. It reimburses the expenses incurred due to illness or injury or pays the care provider of the insured individual directly.
+                          </p>
+                          <div class="btn-box">
+                            <a href="" class="btn1">
+                              Read More
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="img-box">
+                          <img src="{% static 'images/gpu-illustration.svg' %}" alt="">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="container ">
+                    <div class="row">
+                      <div class="col-md-6 ">
+                        <div class="detail-box">
+                          <h1>
+                            Client
+                          </h1>
+                          <p>
+                            A client is person who is insured and is able to claim the insurance. Depending on the health insurance policy the client is given the benefits. And depending on the healthcare benefits provided by the healthcare the bills should be provided to reimburse the money to the client or the healthcare.
+                          </p>
+                          <div class="btn-box">
+                            <a href="" class="btn1">
+                              Read More
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="img-box">
+                          <img src="{% static 'images/btc-illustration.svg' %}" alt="">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ol class="carousel-indicators">
+                <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+                <li data-target="#customCarousel1" data-slide-to="1"></li>
+                <li data-target="#customCarousel1" data-slide-to="2"></li>
+              </ol>
+            </div>
+      
+          </section> -->
+          <!-- end slider section -->
+        </div>
+      
+      
+
+    {% block content %}
+
+    {% endblock content %}
+
+    
+  <!-- info section -->
+
+  <section class="info_section layout_padding2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-3 info_col">
+          <div class="info_contact">
+            <h4>
+              Address
+            </h4>
+            <div class="contact_link_box">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  Chatanya Bharati Institute of Technology, Osman Sagar Rd, Kokapet, Gandipet, Telangana 500075.
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  Call +91 84669 97201
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span>
+                  chaitanyabharati@gmail.com
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="info_social">
+            <a href="">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-linkedin" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 info_col">
+          <div class="info_detail">
+            <h4>
+              Info
+            </h4>
+            <p>
+              necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-2 mx-auto info_col">
+          <div class="info_link_box">
+            <h4>
+              Links
+            </h4>
+            <div class="info_links">
+              <a class="active" href="{% url 'home' %}">
+                Home
+              </a>
+              <a class="" href="{% url 'insurance' %}">
+                Insurance
+              </a>
+              <a class="" href="{% url 'myplans' %}">
+                My plans
+              </a>
+              <a class="" href="{% url 'claim' %}">
+                Claim
+              </a>
+              <a class="" href="">
+                Notifications
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 info_col ">
+          <h4>
+            Subscribe
+          </h4>
+          <form action="#">
+            <input type="text" placeholder="Enter email" />
+            <button type="submit">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end info section -->
+
+  <!-- jQery -->
+  <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <!-- bootstrap js -->
+  <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+  <!-- owl slider -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- custom js -->
+  <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+  </script>
+  <!-- End Google Map -->
+  <script type="text/javascript">
+		function googleTranslateElementInit() {
+			new google.translate.TranslateElement(
+				{pageLanguage: 'en'},
+				'google_translate_element'
+			);
+		}
+	</script>
+
+	<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,286 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Register</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="">
+<!--===============================================================================================-->	
+	<!-- <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/> -->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('{% static 'images/bg-01.jpg' %}');">
+			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33" style="width: 1000px;">
+				<form class="login100-form validate-form flex-sb flex-w" method="POST" action="">
+					{% csrf_token %}
+					<div style="width: 100%;">
+						<span class="login100-form-title p-b-20">
+						Register
+					</span>
+                    
+					<!-- <a href="#" class="btn-face m-b-20">
+						<i class="fa fa-facebook-official"></i>
+						Facebook
+					</a>
+
+					<a href="#" class="btn-google m-b-20">
+						<img src="{% static 'images/icons/icon-google.png' %}" alt="GOOGLE">
+						Google
+					</a> -->
+
+					<div class="p-t-31 p-b-9">
+						<span class="txt1">
+							Username
+						</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate = "Lastname is required">
+						<!-- <input class="input100" type="text" name="lastname" > -->
+						{{form.username}}
+						<span class="focus-input100"></span>
+					</div>
+
+                    <div class="p-t-31 p-b-9">
+						<span class="txt1">
+							E-mail
+						</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate = "Username is required">
+						<!-- <input class="input100" type="text" name="email" > -->
+						{{form.email}}
+						<span class="focus-input100"></span>
+					</div>
+					
+					<div class="p-t-13 p-b-9">
+						<span class="txt1">
+							Password
+						</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<!-- <input class="input100" type="password" name="pass" > -->
+						{{form.password1}}
+						<span class="focus-input100"></span>
+					</div>
+
+                    <div class="p-t-13 p-b-9">
+						<span class="txt1">
+							Re-enter Password
+						</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<!-- <input class="input100" type="password" name="repass" > -->
+						{{form.password2}}
+						<span class="focus-input100"></span>
+					</div>
+					<br>
+					<hr style="border: 1px solid grey;">
+
+				</div>
+				
+					<div style="display: none;width: 100%;" class="hidediv">
+						<span class="login100-form-title p-b-20">
+							Please provide us your details
+						</span>
+						<div class="p-t-31 p-b-9">
+							<span class="txt1">
+								Firstname
+							</span>
+						</div>
+						<div class="wrap-input100 validate-input" data-validate = "Firstname is required">
+							<input class="input100" type="text" name="firstname" > 
+							<span class="focus-input100"></span>
+						</div>
+	
+						<div class="p-t-31 p-b-9">
+							<span class="txt1">
+								Lastname
+							</span>
+						</div>
+						<div class="wrap-input100 validate-input" data-validate = "Lastname is required">
+							<input class="input100" type="text" name="lastname" >
+							<span class="focus-input100"></span>
+						</div>
+						
+						<div class="p-t-31 p-b-9">
+							<span class="txt1">
+								Phone Number
+							</span>
+						</div>
+						<div class="wrap-input100 validate-input" data-validate = "Phone Number is required">
+							<!-- <input class="input100" type="number" name="phonenumber" > -->
+							<input class="input100" type="tel" id="phone" name="phone" placeholder="" pattern="[0-9]{10}" required>
+							<span class="focus-input100"></span>
+						</div>
+	
+						<div class="p-t-31 p-b-9">
+							<span class="txt1">
+								Date of Birth
+							</span>
+						</div>
+						<div class="wrap-input100 validate-input" data-validate = "Date of Birth is required">
+							<input class="input100" type="date" name="dob" >
+							<span class="focus-input100"></span>
+						</div>
+	
+						<div class="p-t-31 p-b-9">
+							<span class="txt1">
+								Address
+							</span>
+						</div>
+						<div class="wrap-input100 validate-input" data-validate = "Address is required">
+							<textarea class="input100" type="text" name="address" ></textarea>
+							<span class="focus-input100"></span>
+						</div>            
+	
+						<div class="p-t-31 p-b-9">
+							<span class="txt1">
+								State
+							</span>
+						</div>
+						<div class="wrap-input100 validate-input" data-validate = "State is required">
+							<input class="input100" type="text" name="state" >
+							<span class="focus-input100"></span>
+						</div>
+	
+						<div class="p-t-31 p-b-9">
+							<span class="txt1">
+								City
+							</span>
+						</div>
+						<div class="wrap-input100 validate-input" data-validate = "City is required">
+							<input class="input100" type="text" name="city" >
+							<span class="focus-input100"></span>
+						</div>
+	
+						<div class="p-t-31 p-b-9">
+							<span class="txt1">
+								Occupation
+							</span>
+						</div>
+						<div class="wrap-input100 validate-input" data-validate = "Occupation is required">
+							<input class="input100" type="text" name="occ" >
+							<span class="focus-input100"></span>
+						</div>
+	
+						<div class="p-t-31 p-b-9">
+							<span class="txt1">
+								Net Worth
+							</span>
+						</div>
+						<div class="wrap-input100 validate-input" data-validate = "Net-Worth is required">
+							<input class="input100" type="text" name="networth" >
+							<span class="focus-input100"></span>
+						</div>
+
+						<!-- <div class="p-t-31 p-b-9">
+							<span class="txt1">
+								Driving Licence
+							</span>
+						</div>
+						<div class="wrap-input100 validate-input" data-validate = "Driving Licence is required">
+							<input class="input100" type="file" name="dl" >
+							<span class="focus-input100"></span>
+						</div>
+	
+						<div class="p-t-31 p-b-9">
+							<span class="txt1">
+								Aadhaar card
+							</span>
+						</div>
+						<div class="wrap-input100 validate-input" data-validate = "Aadhaar is required">
+							<input class="input100" type="file" name="aadhaar" >
+							<span class="focus-input100"></span>
+						</div> -->
+
+
+					</div>
+
+					{{form.errors}}
+					<div class="container-login100-form-btn m-t-37 zee">
+						<button class="login100-form-btn" id="togglebtn">
+							Register
+						</button>
+					</div>
+
+
+					<div class="w-full text-center p-t-35">
+						<span class="txt2">
+							Already a member?
+						</span>
+
+						<a href="{% url 'login' %}" class="txt2 bo1">
+							Login here
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+	<script>
+		var form_fields = document.getElementsByTagName('input')
+			form_fields[1].classList.add('input100');
+			form_fields[2].classList.add('input100');
+			form_fields[3].classList.add('input100');
+			form_fields[4].classList.add('input100');
+	
+	
+			for (var field in form_fields){	
+				form_fields[field].className += ' form-control'
+			}
+
+		const togglebtn = document.querySelector('#togglebtn');
+		const divlist = document.querySelector('.hidediv');
+
+		togglebtn.addEventListener('click', () => {
+			if (divlist.style.display === 'none') {
+				divlist.style.display = 'block';
+			} else {
+				divlist.style.display = 'none';
+			}
+		});
+	</script>
+
+</body>
+</html>
