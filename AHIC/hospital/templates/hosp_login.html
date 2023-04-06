@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Hospital Register</title>
+
+    <!-- Icons font CSS-->
+    <link href="{% static 'vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'vendor/select3/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'css/main1.css' %}" rel="stylesheet" media="all">
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title" style="text-align: center; color: black; font-size: 2rem;"><b>Healthcare Login</b></h2>
+                    {% for message in messages %}
+					<div class="p-t-13 p-b-9" style="border: 1px solid #555555; border-radius: 5px;">
+						<p class="txt1" style="color: greenyellow;font-size: 12px;text-align: center;padding: 10px;" id="messages"><b>{{message}}</b></p>
+					</div>
+					{% endfor %}
+                    <hr>
+                    <br><br>
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label" style="color: black;"><b>Username</b></label>
+                                    <input class="input--style-4" style="width: 212%;" type="text" name="username">
+                                </div>
+                            </div>
+                            <div class="col-2"></div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label" style="color: black;"><b>Password</b></label>
+                                    <input class="input--style-4" style="width: 212%;" type="password" name="password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full text-center p-t-35" style="text-align: right;">
+                            <span class="txt2">
+                                Don't have an account?
+                            </span>
+    
+                            <a href="{% url 'hospregister' %}" class="txt2 bo1">
+                                Register here
+                            </a>
+                        </div>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit" style="width: 100%;">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'vendor/select3/select2.min.js' %}"></script>
+    <script src="{% static 'vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'vendor/datepicker/daterangepicker.js' %}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'js/global.js' %}"></script>
+
+</body>
+
+</html>
+<!-- end document-->
