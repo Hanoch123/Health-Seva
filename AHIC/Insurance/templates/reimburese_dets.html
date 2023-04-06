@@ -1,0 +1,494 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Health-Seva</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/inscss/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/inscss/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/inscss/responsive.css' %}" rel="stylesheet" />
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="{% url 'inshome' %}">
+            <span class="notranslate">
+              Health-Seva
+            </span>
+          </a>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="s-1"> </span>
+            <span class="s-2"> </span>
+            <span class="s-3"> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
+              <ul class="navbar-nav  ">
+                <li class="nav-item ">
+                  <a class="nav-link" href="{% url 'inshome' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'insclients' %}"> Clients</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'insplans' %}"> Plans</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'insclaims' %}">Claims</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'insreimburese' %}">Reimburesement<span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'insprofile' %}"> Profile </a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'inslogout' %}">Logout</a>
+                </li>
+                &ensp;<div id="google_translate_element"></div>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+  <style>
+    .comp{
+      float: right;padding: 5px 0px;border: 1px solid black;background: #dcdcdc;color: black; width: 75%;border-radius: 5px;
+      text-align: center;
+    }
+  </style>
+
+  <div class="footer_bg">
+
+    <!-- contact section -->
+    <section class="contact_section layout_padding" id="contactLink" style="background: white;">
+      <div class="container">
+        <!-- <div class="heading_container">
+          <h2 style="color: black;font-size: 2rem">
+            Client Details
+          </h2>
+        </div> -->
+      </div>
+      <div style="margin: 15px 40px;padding: 15px;border: transparent; border-radius: 5px; background: white;color: black; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+        <div class="heading_container">
+          <h2 style="color: black;font-size: 2rem; padding-top: 2%;">
+            Claim Details
+          </h2>
+          {{form.errors}}
+          {{form1.errors}}
+          {{form2.errors}}
+        </div>
+  {% if details.hosp_status == "Approved" %}
+  <div style="text-align: center; border: 1px solid #4F8A10;background: #DFF2BF;padding: 5px;">
+    <p><i style="color: #4F8A10;" class="fa-solid fa-circle-check"></i>&ensp;This Claim is Approved by {{details.hosp.hosp_name}} </p>
+  </div>
+        {% if details.status == "Approved" %}
+        <div style="text-align: center; border: 1px solid #4F8A10;background: #DFF2BF;padding: 5px;">
+          <p><i style="color: #4F8A10;" class="fa-solid fa-circle-check"></i>&ensp;Approved Application</p>
+          <p>Policy Number : {{details.policy_no}}</p>
+        </div>
+        {% elif details.status == "Denied" %}
+        <div style="text-align: center;border: 1px solid red;background: #FFBABA;padding: 5px;">
+          <p><i style="color: red;" class="fa-solid fa-circle-xmark"></i>&ensp;Denied Application</p>
+        </div>
+        {% endif %}
+  {% elif details.hosp_status == "Denied" %}
+  <div style="text-align: center;border: 1px solid red;background: #FFBABA;padding: 5px;">
+    <p><i style="color: red;" class="fa-solid fa-circle-xmark"></i>&ensp;This Claim was denied by {{details.hosp.hosp_name}}</p>
+  </div>
+  {% elif details.hosp_status == "Pending" %}
+  <div style="text-align: center;border: 1px solid yellow;background: lightyellow;padding: 5px;">
+    <p><i style="color: darkgoldenrod;" class="fa-solid fa-spinner"></i>&ensp;This Claim is not verified by {{details.hosp.hosp_name}}</p>
+  </div>
+  {% endif %}
+        <hr width="75%" style="border: 1px solid #041858;">
+        <div style="margin: 2% 25%;">
+            <div style="text-align: center;">
+            <div>
+                <p><b>Bank Name : </b><span  class="comp">
+                  {{  details.banks.bankname}}
+                </span>
+              </p>
+            </div>
+            <div>
+                <p><b>Policy Number : </b><span  class="comp">
+                  {{  details.policy_no}}
+                </span>
+              </p>
+            </div>
+            <div>
+                <p><b>Hospital Name : </b><span  class="comp">
+                  {{  details.hosp}}
+                </span>
+              </p>
+            </div>
+            <div>
+                <p><b>Doctor Name : </b><span  class="comp">
+                  {{  details.doc_name}}
+                </span>
+              </p>
+            </div>
+            <div>
+              <p><b>Cause : </b><span  class="comp">
+                {{  details.treatment}}
+              </span>
+            </p>
+            </div>
+            <div>
+              <p><b>Medication : </b><span  class="comp">
+                {{  details.medication}}
+              </span>
+            </p>
+            </div>
+            <div>
+                <p><b>Admitted Date : </b><span  class="comp">
+                  {{ details.admit_date}}
+                </span>
+              </p>
+            </div>
+            <div>
+                <p><b>Discharged Date : </b><span  class="comp">
+                  {{  details.disc_date}}
+                </span>
+              </p>
+            </div>
+            <div>
+                <p><b>Appliced on : </b><span  class="comp">
+                  {{  details.ap_date}} {{ details.ap_time}}
+                </span>
+              </p>
+            </div>
+            <div>
+                <p><b>Bill : </b><span  style="float: right;padding: 5px 0px;border: transparent;background: #041858; width: 75%;border-radius: 5px;text-align: center;">
+                  <a href="{{details.bill.url}}" target="_blank" style="color: #d8bf36;">View Bill</a>
+                </span>
+              </p>
+              </div>
+        </div>
+
+            <br>
+        <!-- <img src="{{details.pic.url}}" style="width: 20%;"> -->
+        <!-- <div style="text-align: center;">
+          <img src="{{details.pic.url}}" style="width: 75%;">
+          <p><b>Recent icture</b></p>
+        </p>
+        </div> -->
+        <!-- <hr style="border: 1px solid #041858;">
+          <div style="text-align: center;">
+            <p style="font-size: 1.5rem;"><b>Client Details</b></p>
+          </div>
+          <hr style="border: 1px solid #041858;">
+          <div>
+            <p><b>First Name : </b><span  class="comp">
+              {{details.cli.firstname}}
+            </span>
+          </p>
+          </div>
+          <div>
+            <p><b>Last Name : </b><span  class="comp">
+              {{details.cli.lastname}}
+            </span>
+          </p>
+          </div>
+          <div>
+            <p><b>Email : </b><span  class="comp">
+              {{details.cli.email}}
+            </span>
+          </p>
+          </div>
+          <div>
+            <p><b>Phone Number : </b><span  class="comp">
+              {{details.cli.ph_num}}
+            </span>
+          </p>
+          </div>
+          <div>
+            <p><b>Date of Birth : </b><span  class="comp">
+              {{details.cli.dob}}
+            </span>
+          </p>
+          </div>
+          <div>
+            <p><b>Address : </b><span  class="comp">
+              {{details.cli.Address}}
+            </span>
+          </p>
+          </div>
+          <div>
+            <p><b>City : </b><span  class="comp">
+              {{details.cli.City}}
+            </span>
+          </p>
+          </div>
+          <div>
+            <p><b>State : </b><span  class="comp">
+              {{details.cli.State}}
+            </span>
+          </p>
+          </div>
+          <div>
+            <p><b>Occupation : </b><span  class="comp">
+              {{details.cli.Occupation}}
+            </span>
+          </p>
+          </div>
+          <div>
+            <p><b>Net Worth : </b><span  class="comp">
+              {{details.cli.NetWorth}}
+            </span>
+          </p>
+          </div>
+          <br>
+           <hr style="border: 1px solid #041858;">
+          <div style="text-align: center;">
+            <p style="font-size: 1.5rem;"><b>Bill</b></p>
+          </div>
+          <hr style="border: 1px solid #041858;">
+          
+      </div> -->
+      <hr width="100%" style="border: 1px solid #041858;">
+    {% if details.hosp_status == "Approved" %}
+    {% if details.status == "Pending" %}
+      <div style="text-align: center;">
+        <p>( Important Note<span style="color: red;">*</span>: Please check the client details carefully, if the details are not as per requirement <span style="color: red;">Deny</span> the Insurance Approval )</p>
+      </div>
+      <style>
+        .okay{
+          text-align: center;
+          width: 15%;
+        }
+        .zee{
+          height: 100px;
+          width: 50%;
+        }
+      </style>
+      <form method="POST" action="">
+        {% csrf_token %}
+      <div style="text-align: center;">
+        <!-- <button onclick="myApp()" style="background: #198754;">Approve</button>
+        <button onclick="myDen()" style="background: #B00020;">Deny</button> -->
+        <label>Applictaion Status : </label>
+        {{form.status}}
+        <br>
+        <label>Fund released (Specify the insured amount): ₹</label>
+        {{form.rel_fund}} /-
+        <br>
+        <!-- <div style="display: none;">{{form1}}</div> -->
+        <label>Notify the client : </label><br>
+        {{form2.notf}}
+        <p>( Note<span style="color: red;">*</span>: Please state the appropriate reasons if the claim is <span style="color: red;">Denied</span> )</p>
+        <!-- <select name="select" id="select" style="text-align: center;padding: 5px;width: 15%;">
+          <option value="None" style="color: black;"><b>----------</b></option>
+          <option value="Approve" style="color: green;"><b>Approve</b></option>
+          <option value="Deny" style="color: red;"><b>Deny</b></option>
+        </select> -->
+      </div>
+      <!-- <p>ok</p>-->
+      <!-- <div class="hid-div" name="appr" id="appr">
+        <input type="checkbox">
+        <span style="font-size: 0.75rem;">I hearby confirm that,I have checked all the client details carefully and the details are as per requirement.
+          </span>
+          <br>
+           <button type="submit" style="color: #d8bf36;background: #041858;border-radius: 5px;">Submit</button>
+        </div>
+      <div class="hid-div" name="den" id="den">
+          <label>Please state the reason : </label>
+          <input type="text" name="dens" id="dens">
+          <br>
+      </div> -->
+      <div style="text-align: center;" name="sub" id="sub">
+        <button type="submit" style="color: #d8bf36;background: #041858;border-radius: 5px;">Submit</button>
+      </div>
+      </form>
+      <!--<p>ok2</p> -->
+    {% endif %}
+    {% endif %}
+    </div>
+    </section>
+    <!-- <script>
+        var x = document.getElementById("select");
+        var y = document.getElementById("appr");
+        var z = document.getElementById("den");
+        var a = document.getElementById("sub");
+        x.addEventListener('change', function handleChange(event){
+          if(event.target.value === 'Approve') {
+            y.style.display = 'block';
+            a.style.display = 'block';
+            z.style.display = 'none';
+          } else if(event.target.value === 'Deny') {
+            y.style.display = 'none';
+            a.style.display = 'block';
+            z.style.display = 'block';
+          } else {
+            y.style.display = 'none';
+            z.style.display = 'none';
+            a.style.display = 'none';
+          }
+        });
+        // y.style.display = "none";
+        // if (x.style.display === "none") {
+        //   x.style.display = "block";
+        // } else {
+        //   x.style.display = "none";
+        // }
+      </script> -->
+      <style>
+        .hid-div{
+          text-align: center;
+          display: none;
+        }
+      </style>
+
+    <!-- info section -->
+    <section class="info_section layout_padding2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="info_logo">
+              <h3>
+                Health-Seva
+              </h3>
+              <p>
+                Health Seva helps your health insurance process and claims easier.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_links">
+              <h4>
+                BASIC LINKS
+              </h4>
+              <ul class="  ">
+                <li class=" active">
+                  <a class="" href="{% url 'inshome' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="">
+                  <a class="" href="{% url 'insclients' %}"> Clients</a>
+                </li>
+                <li class="">
+                  <a class="" href="{% url 'insplans' %}"> Plans</a>
+                </li>
+                <li class="">
+                  <a class="" href="{% url 'insclaims' %}"> Claims </a>
+                </li>
+                <li class="">
+                  <a class="" href="{% url 'insreimburese' %}"> Reimburesement </a>
+                </li>
+                <li class="">
+                  <a class="" href="{% url 'insprofile' %}"> Profile </a>
+                </li>
+                <li class="">
+                  <a class="" href="#contactLink">Contact Us</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_contact">
+              <h4>
+                CONTACT DETAILS
+              </h4>
+              <a href="">
+                <div class="img-box">
+                  <img src="{% static 'images/telephone-white.png' %}" width="12px" alt="">
+                </div>
+                <p>
+                  +91 8466997216
+                </p>
+              </a>
+              <a href="">
+                <div class="img-box">
+                  <img src="{% static 'images/envelope-white.png' %}" width="18px" alt="">
+                </div>
+                <p>
+                  principal@cbit.ac.in
+                </p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_form ">
+              <h4>
+                NEWSLETTER
+              </h4>
+              <form action="">
+                <input type="email" placeholder="Enter your email">
+                <button>
+                  Subscribe
+                </button>
+              </form>
+              <div class="social_box">
+                <a href="https://www.facebook.com/CBIThyderabad/">
+                  <img src="{% static 'images/info-fb.png' %}" alt="">
+                </a>
+                <a href="https://twitter.com/cbithyd">
+                  <img src="{% static 'images/info-twitter.png' %}" alt="">
+                </a>
+                <a href="https://in.linkedin.com/school/chaitanya-bharathi-institute-of-technology/">
+                  <img src="{% static 'images/info-linkedin.png' %}" alt="">
+                </a>
+                <a href="https://www.youtube.com/channel/UCUW8oQB8Fl6j-pg2g_sf1tw">
+                  <img src="{% static 'images/info-youtube.png' %}" alt="">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- end info_section -->
+
+  </div>
+
+  <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+
+
+</body>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {pageLanguage: 'en'},
+      'google_translate_element'
+    );
+  }
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+
+</html>

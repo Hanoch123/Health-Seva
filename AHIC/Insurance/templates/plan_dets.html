@@ -1,0 +1,377 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Health-Seva</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/inscss/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/inscss/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/inscss/responsive.css' %}" rel="stylesheet" />
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="{% url 'inshome' %}">
+            <span class="notranslate">
+              Health-Seva
+            </span>
+          </a>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="s-1"> </span>
+            <span class="s-2"> </span>
+            <span class="s-3"> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
+              <ul class="navbar-nav  ">
+                <li class="nav-item ">
+                  <a class="nav-link" href="{% url 'inshome' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'insclients' %}"> Clients</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'insplans' %}"> Plans<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'insclaims' %}">Claims</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'insreimburese' %}">Reimburesement</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'insprofile' %}"> Profile </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'inslogout' %}">Logout</a>
+                </li>
+                &ensp;<div id="google_translate_element"></div>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+  <style>
+    .comp{
+      float: right;padding: 5px 0px;border: 1px solid black;background: #dcdcdc;color: black; width: 75%;border-radius: 5px;
+      text-align: center;
+    }
+  </style>
+
+  <div class="footer_bg">
+
+    <!-- contact section -->
+    <section class="contact_section layout_padding" id="contactLink" style="background: white;">
+      <div class="container">
+        <!-- <div class="heading_container">
+          <h2 style="color: black;font-size: 2rem">
+            Client Details
+          </h2>
+        </div> -->
+      </div>
+      <div style="margin: 15px 40px;padding: 30px 50px;border: transparent; border-radius: 5px; background: white;color: black; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+        <div style="text-align: center;"><img src="{% static 'images/bank.png' %}" style="width: 50px;">&nbsp;&nbsp;<h1 style="display: inline;font-size: 35px;"><b>{{bks.no_plans}}</b></h1>
+        </div>
+          <hr>
+        <div style="text-align:justify;">
+        <h2>About {{bks.no_plans}}</h2>
+        <p>{{bks.desc}}</p>
+        <h2>Key Inclusions and Exclusions of The Plan</h2>
+          <div style="border: 3px solid #fff;padding: 20px;text-align: center;height: 50vh;">
+
+            <div style="width: 50%;float: left;padding: 20px;">
+              <div style="background: #DFF2BF; padding: 10px 10px; border: 1px solid #4F8A10;height: 40vh;">
+                <p style="color: #4F8A10;"><i style="color: #4F8A10;" class="fa-solid fa-thumbs-up"></i>&ensp;<b>Inclusions</b></p>
+                <p>{{bks.features}}</p>
+              </div>
+            </div>
+            
+            <div style="width: 50%;float: left;padding: 20px;">
+              <div style="background: #FFBABA; padding: 10px 10px; border: 1px solid #D8000C;height: 40vh;">
+                <p style="color: #D8000C;;"><i style="color: #D8000C;" class="fa-solid fa-thumbs-down"></i>&ensp;<b>Exclusions</b></p>
+                <p>{{bks.exclusions}}</p>
+              </div>
+            </div>
+            
+          </div>     
+        </div>
+        <div style="width: 100%;">
+          <div class="container">
+            <h2>Policy Details</h2>
+            <ul class="responsive-table">
+              <!-- <li class="table-header">
+                <div class="col col-1" style="max-width: none;"><b>Plan Type</b></div>
+                <div class="col col-2" style="max-width: none;"><b>Coverage</b></div>
+                <div class="col col-3" style="max-width: none;"><b>Tenure</b></div>
+                <div class="col col-4" style="max-width: none;"><b>Premium</b></div>
+              </li> -->
+              <li class="table-row">
+                <div class="col col-1" style="max-width: none;" data-label="Job Id"><b>
+                  <p><i class="fa-solid fa-users-between-lines"></i>&ensp;Plan Type</p>
+                  <p><i class="fa-solid fa-clock"></i>&ensp;Coverage</p>
+                  <p><i class="fa-solid fa-money-bill-trend-up"></i>&ensp;Tenure</p>
+                  <p><i class="fa-solid fa-money-check-dollar"></i>&ensp;Premium</p>
+                  </b>
+                </div>
+                <div class="col col-4" style="max-width: none;" data-label="Payment Status">
+                  <p>{{bks.getval}}</p>
+                  <p>{{bks.getcoverage}}</p>
+                  <p>{{bks.gettenure}}</p>
+                  <p>{{bks.premium}}/annum</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+    </section>
+    <!-- <script>
+        var x = document.getElementById("select");
+        var y = document.getElementById("appr");
+        var z = document.getElementById("den");
+        var a = document.getElementById("sub");
+        x.addEventListener('change', function handleChange(event){
+          if(event.target.value === 'Approve') {
+            y.style.display = 'block';
+            a.style.display = 'block';
+            z.style.display = 'none';
+          } else if(event.target.value === 'Deny') {
+            y.style.display = 'none';
+            a.style.display = 'block';
+            z.style.display = 'block';
+          } else {
+            y.style.display = 'none';
+            z.style.display = 'none';
+            a.style.display = 'none';
+          }
+        });
+        // y.style.display = "none";
+        // if (x.style.display === "none") {
+        //   x.style.display = "block";
+        // } else {
+        //   x.style.display = "none";
+        // }
+      </script> -->
+      <style>
+        .hid-div{
+          text-align: center;
+          display: none;
+        }
+      </style>
+
+    <!-- info section -->
+    <section class="info_section layout_padding2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="info_logo">
+              <h3>
+                Health-Seva
+              </h3>
+              <p>
+                Health Seva helps your health insurance process and claims easier.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_links">
+              <h4>
+                BASIC LINKS
+              </h4>
+              <ul class="  ">
+                <li class=" active">
+                  <a class="" href="{% url 'inshome' %}">Home</a>
+                </li>
+                <li class="">
+                  <a class="" href="{% url 'insclients' %}"> Clients</a>
+                </li>
+                <li class="">
+                  <a class="" href="{% url 'insplans' %}"> Plans<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="">
+                  <a class="" href="{% url 'insclaims' %}"> Claims </a>
+                </li>
+                <li class="">
+                  <a class="" href="{% url 'insreimburese' %}"> Reimburesement </a>
+                </li>
+                <li class="">
+                  <a class="" href="{% url 'insprofile' %}"> Profile </a>
+                </li>
+                <li class="">
+                  <a class="" href="#contactLink">Contact Us</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_contact">
+              <h4>
+                CONTACT DETAILS
+              </h4>
+              <a href="">
+                <div class="img-box">
+                  <img src="{% static 'images/telephone-white.png' %}" width="12px" alt="">
+                </div>
+                <p>
+                  +91 8466997216
+                </p>
+              </a>
+              <a href="">
+                <div class="img-box">
+                  <img src="{% static 'images/envelope-white.png' %}" width="18px" alt="">
+                </div>
+                <p>
+                  principal@cbit.ac.in
+                </p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_form ">
+              <h4>
+                NEWSLETTER
+              </h4>
+              <form action="">
+                <input type="email" placeholder="Enter your email">
+                <button>
+                  Subscribe
+                </button>
+              </form>
+              <div class="social_box">
+                <a href="https://www.facebook.com/CBIThyderabad/">
+                  <img src="{% static 'images/info-fb.png' %}" alt="">
+                </a>
+                <a href="https://twitter.com/cbithyd">
+                  <img src="{% static 'images/info-twitter.png' %}" alt="">
+                </a>
+                <a href="https://in.linkedin.com/school/chaitanya-bharathi-institute-of-technology/">
+                  <img src="{% static 'images/info-linkedin.png' %}" alt="">
+                </a>
+                <a href="https://www.youtube.com/channel/UCUW8oQB8Fl6j-pg2g_sf1tw">
+                  <img src="{% static 'images/info-youtube.png' %}" alt="">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- end info_section -->
+
+
+  </div>
+
+  <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+
+
+</body>
+<style>
+    h2 {
+      font-size: 30px;
+      margin: 20px 0;
+      text-align: center;
+   }
+    h2 small {
+      font-size: 1em;
+   }
+    .responsive-table li {
+      border-radius: 3px;
+      padding: 25px 30px;
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 25px;
+   }
+    .responsive-table .table-header {
+      background-color: #3066ca;
+      font-size: 14px;
+      letter-spacing: 0.03em;
+   }
+    .responsive-table .table-row {
+      background-color: #fff;
+      box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+   }
+    .responsive-table .col-1 {
+      flex-basis: 30%;
+   }
+    .responsive-table .col-2 {
+      flex-basis: 25%;
+   }
+    .responsive-table .col-3 {
+      flex-basis: 25%;
+   }
+    .responsive-table .col-4 {
+      flex-basis: 15%;
+   }
+    @media all and (max-width: 767px) {
+      .responsive-table .table-header {
+        display: none;
+     }
+      .responsive-table li {
+        display: block;
+     }
+      .responsive-table .col {
+        flex-basis: 100%;
+     }
+      .responsive-table .col {
+        display: flex;
+        padding: 10px 0;
+     }
+      .responsive-table .col:before {
+        color: #6c7a89;
+        padding-right: 10px;
+        content: attr(data-label);
+        flex-basis: 50%;
+        text-align: right;
+     }
+   }
+   input{
+     width: 150%;
+   }
+    
+           </style>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {pageLanguage: 'en'},
+      'google_translate_element'
+    );
+  }
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+
+</html>
