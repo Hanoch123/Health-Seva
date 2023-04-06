@@ -1,0 +1,284 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+  </div>
+  <title> Insurance </title>
+
+  <div class="footer_bg">
+    {% if form.errors != ' ' %}
+    <div style="text-align: center;margin: 20px 35px;">
+      <p style="background: #FFBABA;">{{form.errors}}</p>
+    </div>
+    {% endif %}
+
+    <!-- contact section -->
+    <section class="service_section" >
+        <div class="service_container">
+          <div class="container " style="max-width: none;">
+            <!-- <div class="heading_container heading_center">
+              <h1>
+                Policy <span style="color: #00bbf0;">Details</span>
+              </h1>
+            </div> -->
+      <div style="margin: 15px 40px;padding: 30px 50px;border: transparent; border-radius: 5px; background: white;color: black; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+        <div style="text-align: center;"><img src="{% static 'images/bank.png' %}" style="width: 50px;">&nbsp;&nbsp;<h1 style="display: inline;font-size: 35px;"><b>{{bks.no_plans}}</b></h1>
+        </div>
+          <hr>
+        <div style="text-align:justify;">
+        <h2>About {{bks.no_plans}}</h2>
+        <p>{{bks.desc}}</p>
+        <h2>Key Inclusions and Exclusions of The Plan</h2>
+          <div style="border: 3px solid #fff;padding: 20px;text-align: center;height: 50vh;">
+
+            <div style="width: 50%;float: left;padding: 20px;">
+              <div style="background: #DFF2BF; padding: 10px 10px; border: 1px solid #4F8A10;height: 40vh;">
+                <p style="color: #4F8A10;"><i style="color: #4F8A10;" class="fa-solid fa-thumbs-up"></i>&ensp;<b>Inclusions</b></p>
+                <p>{{bks.features}}</p>
+              </div>
+            </div>
+            
+            <div style="width: 50%;float: left;padding: 20px;">
+              <div style="background: #FFBABA; padding: 10px 10px; border: 1px solid #D8000C;height: 40vh;">
+                <p style="color: #D8000C;;"><i style="color: #D8000C;" class="fa-solid fa-thumbs-down"></i>&ensp;<b>Exclusions</b></p>
+                <p>{{bks.exclusions}}</p>
+              </div>
+            </div>
+            
+          </div>
+          
+          
+        </div>
+        <div style="width: 100%;">
+          <div class="container">
+            <h2>Policy Details</h2>
+            <ul class="responsive-table">
+              <!-- <li class="table-header">
+                <div class="col col-1" style="max-width: none;"><b>Plan Type</b></div>
+                <div class="col col-2" style="max-width: none;"><b>Coverage</b></div>
+                <div class="col col-3" style="max-width: none;"><b>Tenure</b></div>
+                <div class="col col-4" style="max-width: none;"><b>Premium</b></div>
+              </li> -->
+              <li class="table-row">
+                <div class="col col-1" style="max-width: none;" data-label="Job Id"><b>
+                  <p><i class="fa-solid fa-users-between-lines"></i>&ensp;Plan Type</p>
+                  <p><i class="fa-solid fa-clock"></i>&ensp;Coverage</p>
+                  <p><i class="fa-solid fa-money-bill-trend-up"></i>&ensp;Tenure</p>
+                  <p><i class="fa-solid fa-money-check-dollar"></i>&ensp;Premium</p>
+                  </b>
+                </div>
+                <div class="col col-4" style="max-width: none;" data-label="Payment Status">
+                  <p>{{bks.getval}}</p>
+                  <p>{{bks.getcoverage}}</p>
+                  <p>{{bks.gettenure}}</p>
+                  <p>{{bks.premium}}/annum</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <br>
+          <hr>
+          <br>
+          <div style="width: 100%;">
+            <h2>Please Fill Your Details To Apply This Plan</h2>
+            <hr style="width: 50%;">
+            <div style="text-align: center;">
+            <p>( Note<span style="color: red;">*</span>: Your Details are Autofilled, if you want to change any details please change them in your profile )</p>
+            </div>
+            <form method="POST" action="" enctype="multipart/form-data" style="padding: 0px 25% 0px 25%;">
+              {% csrf_token %}
+              <div>
+                <p><b>First Name : </b><span  class="comp">
+                  {{clients.firstname}}
+                </span>
+              </p>
+              </div>
+              <div>
+                <p><b>Last Name : </b><span  class="comp">
+                  {{clients.lastname}}
+                </span>
+              </p>
+              </div>
+              <div>
+                <p><b>Email : </b><span  class="comp">
+                  {{clients.email}}
+                </span>
+              </p>
+              </div>
+              <div>
+                <p><b>Phone Number : </b><span  class="comp">
+                  {{clients.ph_num}}
+                </span>
+              </p>
+              </div>
+              <div>
+                <p><b>Date of Birth : </b><span  class="comp">
+                  {{clients.dob}}
+                </span>
+              </p>
+              </div>
+              <div>
+                <p><b>Address : </b><span  class="comp">
+                  {{clients.Address}}
+                </span>
+              </p>
+              </div>
+              <div>
+                <p><b>City : </b><span  class="comp">
+                  {{clients.City}}
+                </span>
+              </p>
+              </div>
+              <div>
+                <p><b>State : </b><span  class="comp">
+                  {{clients.State}}
+                </span>
+              </p>
+              </div>
+              <div>
+                <p><b>Occupation : </b><span  class="comp">
+                  {{clients.Occupation}}
+                </span>
+              </p>
+              </div>
+              <div>
+                <p><b>Net Worth : </b><span  class="comp">
+                  {{clients.NetWorth}}
+                </span>
+              </p>
+              </div>
+              <br>
+              <div style="float: left;">
+                <label><b>Recent Picture<span style="color: red;">*</span> : </b></label>
+              </div>
+              <div >
+                {{form.pic}}
+              </div>
+              <br><br>
+              <div style="float: left;">
+                <label><b>Identity proof<span style="color: red;">*</span> : </b></label>
+              </div>
+              <div >
+                {{form.proof}}
+              </div>
+              <br><br>
+              <div style="float: left;">
+                <label><b>Income proof<span style="color: red;">*</span> : </b></label>
+              </div>
+              <div >
+                {{form.inc_proof}}
+              </div>
+              <br><br>
+              <button style="border: 1px solid #00bbf0;background: #00bbf0;padding: 10px 25px; width: 100%;" type="submit">Apply</button>
+              
+            </form>
+          </div>
+        </div>
+    </div>
+    <style>
+      .comp{
+        float: right;padding: 5px 0px;border: 1px solid black;background: #dcdcdc;color: black; width: 50%;border-radius: 5px;
+        text-align: center;
+      }
+    </style>
+    
+    
+      <!-- <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <input type="text" class="form-control" id="inputName4" placeholder="Name ">
+                </div>
+                <div class="form-group col-md-6">
+                  <input type="email" class="form-control" id="inputEmail4" placeholder="Email id">
+                </div>
+
+              </div>
+              <div class="form-row">
+                <div class="form-group col">
+                  <input type="text" class="form-control" id="inputSubject4" placeholder="Subject">
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="inputMessage" placeholder="Message">
+              </div>
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div> -->
+    </section>
+
+
+    <style>
+      h2 {
+        font-size: 30px;
+        margin: 20px 0;
+        text-align: center;
+     }
+      h2 small {
+        font-size: 1em;
+     }
+      .responsive-table li {
+        border-radius: 3px;
+        padding: 25px 30px;
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 25px;
+     }
+      .responsive-table .table-header {
+        background-color: #3066ca;
+        font-size: 14px;
+        letter-spacing: 0.03em;
+     }
+      .responsive-table .table-row {
+        background-color: #fff;
+        box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+     }
+      .responsive-table .col-1 {
+        flex-basis: 30%;
+     }
+      .responsive-table .col-2 {
+        flex-basis: 25%;
+     }
+      .responsive-table .col-3 {
+        flex-basis: 25%;
+     }
+      .responsive-table .col-4 {
+        flex-basis: 15%;
+     }
+      @media all and (max-width: 767px) {
+        .responsive-table .table-header {
+          display: none;
+       }
+        .responsive-table li {
+          display: block;
+       }
+        .responsive-table .col {
+          flex-basis: 100%;
+       }
+        .responsive-table .col {
+          display: flex;
+          padding: 10px 0;
+       }
+        .responsive-table .col:before {
+          color: #6c7a89;
+          padding-right: 10px;
+          content: attr(data-label);
+          flex-basis: 50%;
+          text-align: right;
+       }
+     }
+     input{
+       width: 150%;
+     }
+      
+             </style>
+    
+    
+
+    <!-- end contact section -->
+{% endblock content %}

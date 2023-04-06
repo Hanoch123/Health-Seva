@@ -1,0 +1,415 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+  </div>
+  <title> Insurance </title>
+
+  {% for message in messages %}
+  <div style="border: 1px solid #4F8A10;background: #DFF2BF;text-align: center;margin: 20px 35px;">
+    <p>{{message}}</p>
+  </div>
+  {% endfor %}
+
+  <!-- service section -->
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+                *, *:after, *:before {
+                    box-sizing: border-box;
+                }
+/* body {
+font-family: "Inter", sans-serif;
+line-height: 1.5;
+min-height: 100vh;
+padding: 5rem 0;
+font-size: clamp(1rem, 2.5vw, 1.125rem);
+}
+section {
+width: 90%;
+max-width: 800px;
+margin-left: auto;
+margin-right: auto;
+}
+section + section {
+margin-top: 2.5em;
+} */
+.zee{
+margin: 15px 40px;
+padding: 15px;
+border: transparent;
+border-radius: 5px; 
+background: white;
+color: black;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+h1 {
+font-weight: 700;
+line-height: 1.125;
+font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+h2 {
+margin-top: 0.25em;
+color: #999;
+font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+}
+h2 + * {
+margin-top: 1.5em;
+}
+summary {
+background-color: #fff;
+position: relative;
+cursor: pointer;
+padding: 1em 0.5em;
+list-style: none;
+}
+summary::-webkit-details-marker {
+display: none;
+}
+summary:hover {
+background-color: #f2f5f9;
+}
+summary div {
+display: flex;
+align-items: center;
+}
+summary h3 {
+display: flex;
+flex-direction: column;
+}
+summary small {
+color: #999;
+font-size: 0.875em;
+}
+summary strong {
+font-weight: 700;
+}
+summary span:first-child {
+width: 4rem;
+height: 4rem;
+border-radius: 10px;
+background-color: #f3e1e1;
+display: flex;
+flex-shrink: 0;
+align-items: center;
+justify-content: center;
+margin-right: 1.25em;
+}
+summary span:first-child svg {
+width: 2.25rem;
+height: 2.25rem;
+}
+summary span:last-child {
+font-weight: 700;
+margin-left: auto;
+}
+summary:focus {
+outline: none;
+}
+summary .plus {
+color: #289672;
+}
+details {
+border-bottom: 1px solid #b5bfd9;
+}
+details[open] {
+box-shadow: -3px 0 0 #00204a;
+}
+details:first-of-type {
+border-top: 1px solid #b5bfd9;
+}
+details > div {
+padding: 2em 2em 0;
+font-size: 0.875em;
+}
+dl {
+display: flex;
+flex-wrap: wrap;
+}
+dl dt {
+font-weight: 700;
+}
+dl div {
+margin-right: 4em;
+margin-bottom: 2em;
+}
+
+</style>
+  
+<!-- style="border: 1px solid transparent;box-shadow: 5px 0px 15px gray;border-radius: 2%;margin: auto;width: 95%;" -->
+  <section class="service_section layout_padding" >
+    <div class="service_container">
+      <div class="container " style="max-width: none;">
+        <div class="heading_container heading_center">
+          <h1 style="font-size: 2rem;"><b>
+            List of <span style="color: #00bbf0;">Claims</span>
+        </b></h1>
+        </div>
+        <hr>
+
+        <div style="text-align: center;">
+            <a href="{% url 'new_claim' %}" style="border: 1px solid #00204a;background: #00204a;color: #d8bf36;padding: 10px;border-radius: 5px;">+ New Claim</a>
+        </div>
+        <hr>
+
+          {% for claim in claims %}
+            {% if claim.cli.user == request.user %}
+            <!-- <div style="margin: 15px 40px;padding: 15px;border: transparent; border-radius: 5px; background: white;color: black; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+            <div>
+              <p><b>First Name : </b><span  class="comp">
+                {{ claim.cli.firstname}}
+              </span>
+            </p>
+            </div>
+            <div>
+              <p><b>Last Name : </b><span  class="comp">
+                {{ claim.cli.lastname}}
+              </span>
+            </p>
+            </div>
+            <div>
+              <p><b>Email : </b><span  class="comp">
+                {{ claim.cli.email}}
+              </span>
+            </p>
+            </div>
+            <div>
+              <p><b>Phone Number : </b><span  class="comp">
+                {{ claim.cli.ph_num}}
+              </span>
+            </p>
+            </div>
+            <div>
+              <p><b>Date of Birth : </b><span  class="comp">
+                {{ claim.cli.dob}}
+              </span>
+            </p>
+            </div>
+            <div>
+              <p><b>Address : </b><span  class="comp">
+                {{ claim.cli.Address}}
+              </span>
+            </p>
+            </div>
+            <div>
+              <p><b>City : </b><span  class="comp">
+                {{ claim.cli.City}}
+              </span>
+            </p>
+            </div>
+            <div>
+              <p><b>State : </b><span  class="comp">
+                {{ claim.cli.State}}
+              </span>
+            </p>
+            </div>
+            <div>
+              <p><b>Occupation : </b><span  class="comp">
+                {{ claim.cli.Occupation}}
+              </span>
+            </p>
+            </div>
+            <div>
+              <p><b>Net Worth : </b><span  class="comp">
+                {{ claim.cli.NetWorth}}
+              </span>
+            </p>
+            </div>
+            <br>
+          </div> -->
+          <div style="margin: 15px 40px;padding: 15px;border: transparent; border-radius: 5px; background: white;color: black; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+            <details>
+              <summary>
+                  <div>
+                      <span style="background-color: #d8bf36;">
+                        <img src="" style="width: 50px;">
+                      </span>
+                      <h3>
+                          <strong>{{claim.cli.firstname}}</strong>
+                          <small>{{claim.banks.bankname}}</small>
+                      </h3>
+                      {% if claim.status == "Pending" %}
+                      <span><a href="{% url 'claim_details' claim.id  %}" style="border: 1px solid #041858; color: white;background: #00204a; padding: 5px 5px;">View Claim</a></span>
+                      {% elif claim.status == "Approved" %}
+                      <span><a href="{% url 'claim_details' claim.id  %}" style="border: 1px solid #4F8A10; color: white;background: #DFF2BF; padding: 5px 5px;">Approved Claim</a></span>
+                      {% elif claim.status == "Denied" %}
+                      <span><a href="{% url 'claim_details' claim.id  %}" style="border: 1px solid red; color: white;background: #FFBABA; padding: 5px 5px;">Denied Claim</a></span>
+                      {% endif %}
+                        <!-- <div class="btn-box"><a href="">
+                        Click to Apply
+                        </a></div> -->
+                      
+                  </div>
+              </summary>
+              <div style="text-align: center;">
+                  <dl>
+                      <div style="padding: 0px 5%;">
+                          <dt><i class="fa-solid fa-envelope"></i>&ensp;Email</dt>
+                          <dd>{{claim.cli.email}}</dd>
+                      </div>
+      
+                      <div style="padding: 0px 5%;">
+                          <dt><i class="fa-solid fa-phone"></i>&ensp;Phone Number</dt>
+                          <dd>{{claim.cli.ph_num}}</dd>
+                      </div>
+      
+                      <div style="padding: 0px 5%;">
+                          <dt><i class="fa-solid fa-clock"></i>&ensp;Applied on</dt>
+                          <dd>{{claim.ap_date}} {{claim.ap_time}}</dd>
+                      </div>
+                  </dl>
+              </div>
+          </details>
+        </div>
+            {% endif %}
+            {% endfor %}
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- end service section -->
+  <!-- about section -->
+
+  <section class="about_section layout_padding">
+    <div class="container  ">
+      <!-- <div class="heading_container heading_center">
+        <h2>
+          About <span>Us</span>
+        </h2>
+        <p>
+          Magni quod blanditiis non minus sed aut voluptatum illum quisquam aspernatur ullam vel beatae rerum ipsum voluptatibus
+        </p>
+      </div> -->
+      <div class="row">
+        <div class="col-md-6 ">
+          <div class="img-box">
+            <img src="{% static 'images/about-img.png' %}" alt="">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="detail-box">
+            <h3>
+              What is Health Insurance?
+            </h3>
+            <p>
+              It is an agreement between the insurer and the policyholder whereby an insurance company agrees to reimburse for medical costs incurred by the policyholder during the tenure of the policy. According to the policy terms, the insured may incur medical expenses if they get ill or meet an unfortunate accident that leads to treatment at the hospital. To avail of the coverage benefits of the policy, the policyholder must pay a specific amount periodically, called a premium.
+            </p>
+            <p>
+              The premium is determined by the insurance company and must be paid by the policyholders without any fail either monthly, quarterly, half-yearly or annually.
+            </p>
+            <a href="https://www.rbi.org.in/Scripts/bs_viewcontent.aspx?Id=2256">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end about section -->
+  <!-- service section -->
+
+  <section class="service_section layout_padding">
+    <div class="service_container">
+      <div class="container ">
+        <div class="heading_container heading_center">
+          <h2>
+            How to Buy <span>Health Insurance</span> Plan Online?
+          </h2>
+          <p>
+            Now getting insured online is not rocket science. Buying an affordable mediclaim policy which meets all your requirements is very simple and quick with us.
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-4 ">
+            <div class="box ">
+              <div class="img-box">
+                <img src="{% static 'images/s1.png' %}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Step 1: Enter Personal Details
+                </h5>
+                <p>
+                  Fill up your details like Name, Mobile Number, Email-Id, Gender, City, and other crucial details to see the top insurance plans available as per your requirements.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 ">
+            <div class="box ">
+              <div class="img-box">
+                <img src="{% static 'images/s2.png' %}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Step 2: Compare Plans Online
+                </h5>
+                <p>
+                  From all the available health insurance quotes, select the plan which meets your budget and requirements in the best manner.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 ">
+            <div class="box ">
+              <div class="img-box">
+                <img src="{% static 'images/s3.png' %}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Step 3: Complete Online Payment
+                </h5>
+                <p>
+                  Choose the payment mode and pay the premium online through a secured payment gateway to get the policy document at your registered email ID.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end service section -->
+
+    <!-- about section -->
+
+    <section class="about_section layout_padding">
+      <div class="container  ">
+        <!-- <div class="heading_container heading_center">
+          <h2>
+            About <span>Us</span>
+          </h2>
+          <p>
+            Magni quod blanditiis non minus sed aut voluptatum illum quisquam aspernatur ullam vel beatae rerum ipsum voluptatibus
+          </p>
+        </div> -->
+        <div class="row" style="text-align: justify;">
+          <div>
+            <div class="detail-box">
+              <h3>
+                How To File A Health Insurance Claim?
+              </h3>
+              <p>
+                Claim under a health insurance policy can be made in two ways - in a cashless manner and in a reimbursement manner. A cashless claim is when you receive treatment at a network hospital of the insurance provider who is servicing your policy. If the claim request is accepted, the insurance company directly settles the bills at the hospital. Whereas in reimbursement claims, you are required to pay for the hospital bill from your own pocket first, and make a claim request with the insurance company later. The insurance company will process your claim and reimburse you for the same after accepting the claim. You can make a health insurance claim by following the simple steps given below:
+              </p>
+              <ul>
+                <li>Step 1: Visit the network hospital or the hospital of your choice and inform the insurance company about the hospitalisation.</li>
+                <li>Step 2: Fill the pre-authorization form at the hospital’s TPA (third-party administrator) desk.</li>
+                <li>Step 3: You will receive an approval letter by the claim management team.</li>
+                <li>Step 4: Respond to the query raised by the claim management team, if any.</li>
+                <li>Step 5: Avail the required medical treatment.</li>
+                <li>Step 6: The insurance company will directly settle the bills at the network hospital as per the terms and conditions mentioned in your policy.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+    <!-- end about section -->
+
+
+  {% endblock content %}
